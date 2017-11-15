@@ -22,6 +22,6 @@ if(!$user->is_logged_in())
 if($user->is_logged_in()!="")
 {
 	$user->logout();	
-	$user->redirect('index.php');
+	$user->redirect('../access_module/index.php');
 }
 ?>

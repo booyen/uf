@@ -24,7 +24,8 @@ $sql="SELECT * FROM um_users WHERE userEmail='$myusername1' and userPass='$mypas
     
 $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result);
-$_SESSION['userid']=$row['userID'];
+    
+$_SESSION['user']=$row['userID'];
 
 $_SESSION['role']=$row['userType'];
 $_SESSION['email']=$row['userEmail'];

@@ -1,3 +1,5 @@
+
+<?php session_start();?>
 <?php require '../inc/config_dashboard_donors.php'; ?>
 <?php require '../inc/views/template_head_start.php'; ?>
 <!-- Page JS Plugins CSS -->
@@ -8,11 +10,46 @@
 <?php require '../inc/views/template_head_end.php'; ?>
 <?php require '../inc/views/base_head.php'; ?>
 
+
+ <?php   
+
+$donor=$_SESSION['user'];
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ummah";
+
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+//$orgnick= $_SESSION['userName'];
+
+$sql="SELECT * FROM donor_info WHERE userID='$donor'";
+
+
+$result=mysqli_query($conn,$sql);
+$row=mysqli_fetch_array($result);
+
+$count=mysqli_num_rows($result);
+
+
+$_SESSION ['donor_tel']= $row['donor_tel'];
+$_SESSION ['donor_name']= $row['donor_name'];
+$donorname= $_SESSION ['donor_name'];
+$donor_tel = $_SESSION['donor_tel'];
+//$_SESSION['orgID']=$row['org_proid'];
+
+//echo $_SESSION['orgID'];
+
+echo $_SESSION['userName'];
+?>
 <!-- Page Header -->
 <!-- FAQ -->
 <div class="content content-boxed">
     <div class="row font-s13">
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <div class="block">
                 <div class="block-header">
                     <ul class="block-options">
@@ -30,17 +67,7 @@
             
         </div>
         
-        <div class="col-lg-3">
-                            <a class="block block-rounded block-link-hover3 text-center" href="javascript:void(0)">
-                                <div class="block-content block-content-full bg-success">
-                                    <div class="h1 font-w700 text-white">$0</div>
-                                    <div class="h5 text-white-op text-uppercase push-5-t">donation given this month</div>
-                                </div>
-                                <div class="block-content block-content-full block-content-mini">
-                                    <i class=" text-danger"></i> Donate now
-                                </div>
-                            </a>
-                        </div>
+       
          <div class="col-lg-4">
           <div class="block block-themed">
                                 <div class="block-header bg-flat">
