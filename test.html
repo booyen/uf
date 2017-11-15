@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="assets/js/plugins/jquery-auto-complete/jquery.auto-complete.min.js"></script>
+
+
+ <input id="hero-demo" autofocus type="text" name="q" placeholder="Programming languages ..."/>
+
+
+<script type="application/javascript">
+$(function(){
+	$('#hero-demo').autoComplete({
+		minChars: 1,
+		source: function(term, suggest){
+			term = term.toLowerCase();
+			var choices = ['ActionScript', 'AppleScript', 'Asp', 'Assembly', 'BASIC', 'Batch', 'C', 'C++', 'CSS', 'Clojure', 'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'HTML', 'Java', 'JavaScript', 'Lisp', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'Scheme', 'SQL', 'TeX', 'XML'];
+			var suggestions = [];
+			for (i=0;i<choices.length;i++)
+				if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+			suggest(suggestions);
+		}
+	});
+});
+
+
+</script>

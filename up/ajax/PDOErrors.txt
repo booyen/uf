@@ -1,0 +1,32 @@
+exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(134): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(65): get_profile()
+#3 {main}exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(134): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(65): get_profile()
+#3 {main}exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(134): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(65): get_profile()
+#3 {main}exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(118): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(99): update_table('profile_pic_url', 'http://localhos...')
+#3 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(64): upload_action()
+#4 {main}exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(134): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(65): get_profile()
+#3 {main}exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'test'@'localhost' (using password: YES)' in C:\xampp\htdocs\uf\uf\up\ajax\connection.php:15
+Stack trace:
+#0 C:\xampp\htdocs\uf\uf\up\ajax\connection.php(15): PDO->__construct('mysql:host=loca...', 'test', '123456')
+#1 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(134): connection()
+#2 C:\xampp\htdocs\uf\uf\up\ajax\profile.php(65): get_profile()
+#3 {main}
