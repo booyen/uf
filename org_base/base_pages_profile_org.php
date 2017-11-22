@@ -6,6 +6,7 @@
 <!-- Page Content -->
 
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -27,7 +28,9 @@ if ($conn->connect_error) {
     if (isset($_GET['Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj']))
     {
         $orgnick = $_GET['Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj'];
-        $sql = "SELECT *, avg(um_rating.rating) AS rating 
+        $sql = "SELECT org_profile.org_proid, org_profile.org_fullname, org_profile.org_username, 
+        org_profile.org_description, org_profile.org_address,org_profile.org_avatar,org_profile.org_city,org_profile.org_contacperson,
+        org_profile.org_postcode, org_profile.org_state,org_profile.org_tel, org_profile.org_year,org_profile.org_type, avg(um_rating.rating) AS rating 
         FROM org_profile LEFT JOIN um_rating ON org_profile.org_proid = um_rating.org_proid 
         WHERE org_profile.org_proid = {$orgnick}";
 
@@ -51,14 +54,17 @@ if ($conn->connect_error) {
                 $avatarorg= $row['org_avatar'];
                
                 $_SESSION['orgID']=$row['org_proid'];
-                $_SESSION['orgRate'] = $row['rating'];
                 $org_prof = $_SESSION['orgID'];
+                echo $org_prof;
+                $_SESSION['orgRate'] = $row['rating'];
                 $org_rate = $_SESSION['orgRate'] ;
+                echo $org_rate;
                 $donorID = $_SESSION['userName'];
                 $_SESSION['org_name'] = $row['org_fullname'];
                 $org_name = $_SESSION['org_name'];
                 $_SESSION['city'] = $row['org_city'];
                 $org_city = $_SESSION['city'];
+            
              
                
                 
@@ -91,11 +97,12 @@ if ($conn->connect_error) {
                  $_SESSION['senangsecret']= $row1['secret_key'];
                  $senangmerchant= $_SESSION['senangmerchantid'];
                  $senangsecret= $_SESSION['senangsecret'];
+                
                 }
 ?>
 <?php 
-                //echo $senangmerchant;
-//echo $org_prof;
+               //echo $senangmerchant;
+               //echo $org_prof;
 //echo "donate with senangpay here <a href=' http://localhost/uf/uf/senangpay_openapi_samplecode/senangpay_openapi_samplecode.php'>aa</a>";
 // echo $rowc['camp_img'];
                
@@ -104,6 +111,7 @@ if ($conn->connect_error) {
 <?php
   
     if ($row122 > 0) {
+        
         
                  $status = "Not Verified";
                  if($row122['veri_status']== $status){
@@ -115,7 +123,7 @@ if ($conn->connect_error) {
                 display:none;
                 }</style>
                 
-                <?php
+                <?php     
                         
                     }
         
@@ -151,21 +159,21 @@ if ($conn->connect_error) {
                 // $fvisit = mysql_fetch_array($result3);
                
             
-            }else{
+                echo $status; }else{
                     
                 $veripro = "Not Verified";
-                 $regnum = "This organization Is not Verify";
+                 $regnum = "This organization is not Verify";
                 ?>
                  
                 <style type="text/css">#donateBlock{
                 display:none;
                 }</style>
             
-                <?php
+                <?php 
                 }
                 
 
-            
+       
    
 
 ?>
@@ -275,7 +283,7 @@ if ($conn->connect_error) {
                             ?>
                             <!-- Article -->
                             <div class="block  text-center">
-                               
+                          
                                <?php $campid = $rowc['campaignID'];
                                  $link = "I would to know more" ;   ?>
                                 
@@ -334,7 +342,7 @@ if ($conn->connect_error) {
                                             
                                             <td>
                                                 <p class="font-w600 push-10">Organization Name</p>
-                                                <div class="text-muted"><?php  echo $row["org_fullname"] ?></div>
+                                                <div class="text-muted">   <?php  echo $org_prof; echo  $_SESSION['senangmerchantid'];?> <?php  echo $row["org_fullname"] ?></div>
                                                 
                                             </td>
                                            

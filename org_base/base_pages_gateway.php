@@ -41,21 +41,25 @@
             
         $bankname1 = $_POST['bankname1'];
         $bankacc1 = $_POST['bankacc1'];
+       
             
             
         $bankname2 = $_POST['bankname2'];
         $bankacc2 = $_POST['bankacc2'];
+
+        $bankname3 = $_POST['bankname3'];
+        $bankacc3 = $_POST['bankacc3'];
             
             
         $receipent1 = $_POST['receipent1'];
         $receipent2 = $_POST['receipent2'];
-         
+        $receipent3 = $_POST['receipent3'];
       
     
     
-        $sql3=" INSERT INTO payment_gateway (org_proid,bank_1,account_1,receipent_1,bank_2,account_2,receipent_2) 
+        $sql3=" INSERT INTO payment_gateway (org_proid,bank_1,account_1,receipent_1,bank_2,account_2,receipent_2,bank_3,account_3,receipent_3) 
         
-        VALUES ('$org_ID','$bankname1','$bankacc1','$receipent1','$bankname2','$bankacc2','$receipent2')";
+        VALUES ('$org_ID','$bankname1','$bankacc1','$receipent1','$bankname2','$bankacc2','$receipent2','$bankname3','$bankacc3','$receipent3')";
        
         $result = mysqli_query($database,"SELECT * FROM org_profile WHERE org_proID = '$org_ID'");
         
@@ -109,7 +113,7 @@ $conn->close();
                                     <form action="" method="post" >
                                         
                                         <div class="form-group">
-                                            <label for="example-nf-password">Bank Account #1</label>
+                                            <label for="example-nf-password">Bank Account #1(Optional)</label>
                                             <input  style="margin-top:8px" class="form-control" type="text" id="example-nf-password" name="bankname1" placeholder="Enter  Bank Name">
                                             
                                             <input  style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="bankacc1" placeholder="Enter your organization bank account number">
@@ -117,12 +121,21 @@ $conn->close();
                                              <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="receipent1" placeholder="Enter your Receipent/organization name as Bank Stated">
                                         </div>
                                          <div class="form-group">
-                                            <label for="example-nf-password">Bank Account #2</label>
+                                            <label for="example-nf-password">Bank Account #2(Optional)</label>
                                             <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="bankname2" placeholder="Enter  Bank Name">
                                              
                                             <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="bankacc2" placeholder="Enter your organization bank account number">
                                              
                                             <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="receipent2" placeholder="Enter your Receipent/organization name as Bank Stated">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="example-nf-password">Bank Account #3(Optional)</label>
+                                            <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="bankname3" placeholder="Enter  Bank Name">
+                                             
+                                            <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="bankacc3" placeholder="Enter your organization bank account number">
+                                             
+                                            <input style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="receipent3" placeholder="Enter your Receipent/organization name as Bank Stated">
 
                                         </div>
                                       
@@ -149,6 +162,38 @@ $conn->close();
                                         
                                         <div class="form-group">
                                             <label for="example-nf-password">Senang Pay integration</label>
+                                            <input  style="margin-top:8px" class="form-control" type="text" id="example-nf-password" name="merchant_id" placeholder="Enter  Merchant id">
+                                            
+                                            <input  style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="secretkey" placeholder="Enter your secret key">
+                                            
+                                           
+                                        </div>
+                                        
+                                      
+                                        <div class="form-group text-right">
+                                            <button class="btn btn-sm btn-primary" type="submit" name="SubmitButtonsenang">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+
+
+                    <div class="row">
+        <div class="block">
+                                <div class="block-header">
+                                    <ul class="block-options">
+                                        <li>
+                                            
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">Paypal.Me Gateway Settings</h3>
+                                </div>
+                                <div class="block-content block-content-narrow">
+                                    <form action="" method="post" >
+                                        
+                                        <div class="form-group">
+                                            <label for="example-nf-password">Enter Your Paypal.me Link</label>
                                             <input  style="margin-top:8px" class="form-control" type="text" id="example-nf-password" name="merchant_id" placeholder="Enter  Merchant id">
                                             
                                             <input  style="margin-top:8px"  class="form-control" type="text" id="example-nf-password" name="secretkey" placeholder="Enter your secret key">
