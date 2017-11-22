@@ -78,10 +78,15 @@
         $query = mysqli_real_escape_string($conn,$query);
         // makes sure nobody uses SQL injection
          
-        $raw_results = mysqli_query($conn,"SELECT * FROM org_profile
-            WHERE (`org_fullname` LIKE '%".$query."%') OR
-            (`org_username` LIKE '%".$query."%')  
+        $raw_results = mysqli_query($conn," SELECT org_profile.org_proid, org_profile.org_fullname, org_profile.org_username, org_profile.org_description, avg(um_rating.rating) AS rating 
+        FROM org_profile LEFT JOIN um_rating ON org_profile.org_proid = um_rating.org_proid 
+        WHERE (org_fullname LIKE '%ummah%') OR (org_username LIKE '%ummah%') 
+        GROUP BY org_profile.org_proid ORDER BY `um_rating`.`rating` DESC 
             ") or die(mysql_error());
+
+          
+         
+          
              
         // * means that it selects all fields, you can also write: `id`, `title`, `text`
         // articles is the name of our table
@@ -117,18 +122,25 @@
                          if(mysqli_num_rows($raw_results) > 0){ // if one or more rows are returned do following
              
             while($results = mysqli_fetch_array($raw_results)){
+              
             // $results = mysql_fetch_array($raw_results) puts data from database into array, while it's valid it does the loop
-             
+          
                 $orgid = $results["org_proid"];
                 $orgname = $results["org_fullname"];
                 $orgnick = $results["org_username"];
                 $orgdesc = $results["org_description"];
-             
+                $orgrate = $results["rating"];
+     
+
+      
                // echo '<tr><td><a href="/uf/uf/profiler/profiles.php?first='.$firstname.'">'.$firstname.'</a><br /></td></tr>';
                 
                 
                // echo "<p><h3>".$results['userName']."</h3>".$results['userEmail']."</p>";
                 // posts results gotten from database(title and text) you can also show id ($results['id'])
+            
+                 //   while($row = $result->fetch_object($result)){
+                  
             
              
  ?>
@@ -136,8 +148,15 @@
                         <tr>
                             <td>
                                 <h3 class="h5 font-w600 push-10">
-                                   <?php echo '<a class="link-effect" href="/uf/uf/org_base/base_pages_profile_org.php?Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj='.$orgid.'">'.$orgname.'</a>'; ?>
-                                    
+                                   
+                                
+      <div class="article">
+        <h3><?php echo '<a class="link-effect" href="/uf/uf/org_base/base_pages_profile_org.php?Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj='.$orgid.'">'.$orgname.'</a>'; ?></h3>
+
+  <div class="article-rating">Rating:  <?php  echo round($orgrate) ?>/5 </div> 
+       
+      </div>
+   
                                 </h3>
                                 <div class="push-10">
                                     <?php // check balik verification, jumlah follower dan jumlah dana yang dikumpulkan ?>
@@ -148,7 +167,7 @@
                                 </div>
                             </td>
                            
-                        </tr>
+                        </tr> 
                                 <?php }
        }
         else{ // if there is no matching rows do following

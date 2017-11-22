@@ -2,6 +2,7 @@
 <?php require '../inc/views/template_head_start.php'; ?>
 <?php require '../inc/views/template_head_end_frontend.php'; ?>
 <?php require '../inc/views/base_head.php'; ?>
+
 <!-- Page Content -->
 
 <?php
@@ -26,7 +27,13 @@ if ($conn->connect_error) {
     if (isset($_GET['Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj']))
     {
         $orgnick = $_GET['Uasd4453279M896bhNJndasdsM8222najGyhkbnA0092jNMqweuiHqweqweashhdj'];
-        $sql = "SELECT * FROM org_profile WHERE org_proid='$orgnick'";
+        $sql = "SELECT *, avg(um_rating.rating) AS rating 
+        FROM org_profile LEFT JOIN um_rating ON org_profile.org_proid = um_rating.org_proid 
+        WHERE org_profile.org_proid = {$orgnick}";
+
+  
+
+        
         
         $result = $conn->query($sql);
         
@@ -44,12 +51,15 @@ if ($conn->connect_error) {
                 $avatarorg= $row['org_avatar'];
                
                 $_SESSION['orgID']=$row['org_proid'];
+                $_SESSION['orgRate'] = $row['rating'];
                 $org_prof = $_SESSION['orgID'];
+                $org_rate = $_SESSION['orgRate'] ;
+                $donorID = $_SESSION['userName'];
                 $_SESSION['org_name'] = $row['org_fullname'];
                 $org_name = $_SESSION['org_name'];
                 $_SESSION['city'] = $row['org_city'];
                 $org_city = $_SESSION['city'];
-                
+             
                
                 
                 
@@ -150,14 +160,19 @@ if ($conn->connect_error) {
                 <style type="text/css">#donateBlock{
                 display:none;
                 }</style>
-                ; 
+            
                 <?php
                 }
                 
+
             
    
 
 ?>
+
+
+
+        
 
 
 
@@ -186,9 +201,21 @@ if ($conn->connect_error) {
                     <div class="font-w700 text-gray-darker animated fadeIn">Location</div>
                     <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)"><?php echo $org_city;?></a>
                 </div>
+
+
+            
+           
                 <div class="col-xs-6 col-sm-4">
-                    <div class="font-w700 text-gray-darker animated fadeIn">Like This Organization</div>
-                    <a class="h2 font-w300 text-primary animated flipInX" href="javascript:void(0)"><i class="fa fa-love"></i></a>
+                    <div class="font-w700 text-gray-darker animated fadeIn">Rate This Organization</div>
+                    <a class="h4 font-w300 text-primary animated flipInX" href="javascript:void(0)">
+                    <div class="article-rating">Rating:  <?php echo round($org_rate) ?>/5  </div> 
+                    <a class="h6 font-w300 text-gray-darker animated flipInX" href="javascript:void(0)">Choose Your NUmber to rate </br> </a>
+                    <?php foreach(range(1, 5) as $rating): ?>
+  				</a>	 <a href="rate.php?orgid=<?php echo  $orgnick; ?>&rating=<?php echo $rating; ?>"><?php echo $rating; ?>
+  				<?php endforeach; ?>
+                   
+         </a>
+                   
                 </div>
               <div class="col-xs-6 col-sm-4">
                     <div class="font-w700 text-gray-darker animated fadeIn">Verfication</div>
@@ -200,7 +227,7 @@ if ($conn->connect_error) {
         <!-- END Stats -->
     </div>
     <!-- END User Header -->
-
+   
     <!-- Main Content -->
     <div class="row">
         <div class="col-sm-6 col-sm-push-7 col-lg-4 col-lg-push-8">
@@ -296,7 +323,8 @@ if ($conn->connect_error) {
                     <h3 class="block-title"><i class="si si-list"></i> Organization details</h3>
                 </div>
                 <div class="block-content">
-                  
+         
+
                     
                   <div class="table-responsive push-50">
                                 <table class="table table-bordered table-hover">
@@ -307,6 +335,7 @@ if ($conn->connect_error) {
                                             <td>
                                                 <p class="font-w600 push-10">Organization Name</p>
                                                 <div class="text-muted"><?php  echo $row["org_fullname"] ?></div>
+                                                
                                             </td>
                                            
                                             <td class="text-left">
@@ -651,7 +680,23 @@ mysqli_close($conn);
         </div>
 </div>
 
-    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+                        $(document).ready(function () {
+                            $("#demo1 .stars").click(function () {
+                           
+                                $.post('rating.php',{rate:$(this).val()},function(d){
+                                    if(d>0)
+                                    {
+                                        alert('You already rated This organization');
+                                    }else{
+                                        alert('Thanks For Rating');
+                                    }
+                                });
+                                $(this).attr("checked");
+                            });
+                        });
+                    </script>
 
 <!-- END Page Content -->
 
